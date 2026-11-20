@@ -26,7 +26,7 @@
           },
           colors: {
             bp: {
-              bg: '#F8FAFC',
+              bg: '#F4F7FA',
               grid: '#E2E8F0',
               cobalt: '#0047AB',
               cobaltDark: '#0F4C81',
@@ -41,7 +41,7 @@
   <style>
     /* Technical 24px Blueprint Grid Background */
     .blueprint-grid {
-      background-color: #F8FAFC;
+      background-color: #F4F7FA;
       background-image:
         linear-gradient(to right, rgba(0, 71, 171, 0.08) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 71, 171, 0.08) 1px, transparent 1px),
@@ -50,7 +50,7 @@
       background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
     }
 
-    /* DIN 7200 Engineering Drawing Sheet */
+    /* DIN Engineering Drawing Sheet */
     .din-sheet {
       position: relative;
       background-color: #FFFFFF;
@@ -120,7 +120,7 @@
       height: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #F8FAFC;
+      background: #F4F7FA;
     }
     ::-webkit-scrollbar-thumb {
       background: #94A3B8;
@@ -223,7 +223,7 @@
             src="assets/racing-banner.jpg"
             alt="Escudería Racing Rams #13 Gravity Race Car"
             onerror="this.style.display='none'; document.getElementById('bannerFallback').style.display='flex';"
-            class="w-full h-full object-cover object-[center_42%] scale-x-[-1]"
+            class="w-full h-full object-cover object-[center_42%] scale-x-[-1] transition-transform duration-500"
           />
 
           <!-- Technical Blueprint Fallback Overlay -->
@@ -249,7 +249,7 @@
           <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div class="flex flex-col sm:flex-row sm:items-center gap-4">
               <!-- Square LR / Profile Photo Badge -->
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#0047AB] border-2 border-slate-800 shadow-md flex flex-col items-center justify-center text-white shrink-0 relative overflow-hidden">
+              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-slate-900 border-2 border-slate-800 shadow-md flex flex-col items-center justify-center text-white shrink-0 relative overflow-hidden">
                 <img
                   src="assets/profile.jpg"
                   alt="Luis Ricardo Arellanes Saucedo"
@@ -257,7 +257,7 @@
                   class="w-full h-full object-cover object-top absolute inset-0 z-10"
                 />
                 <span class="font-display font-bold text-3xl tracking-tighter text-white">LR</span>
-                <span class="font-mono text-[9px] text-sky-200 tracking-widest mt-0.5">B.ENG.</span>
+                <span class="font-mono text-[9px] text-sky-400 tracking-widest mt-0.5">B.ENG.</span>
               </div>
 
               <!-- Name & Degree -->
@@ -308,13 +308,13 @@
           </div>
 
           <!-- Highlighted Internship & Thesis Objective Box -->
-          <div class="rounded-lg border-2 border-[#EA580C] bg-orange-50/60 p-4 sm:p-5 mb-6">
+          <div class="rounded-lg border-2 border-[#0047AB] bg-blue-50/70 p-4 sm:p-5 mb-6">
             <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-              <span class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#EA580C]">
-                <span class="w-2.5 h-2.5 bg-[#0047AB] inline-block"></span>
+              <span class="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[#0047AB]">
+                <span class="w-2.5 h-2.5 bg-[#EA580C] inline-block"></span>
                 <span data-i18n="obj_label">OBJECTIVE // INTERNSHIP &amp; THESIS AVAILABILITY</span>
               </span>
-              <span class="px-2 py-0.5 rounded bg-blue-100 border border-[#0047AB] font-mono text-[11px] font-bold text-[#0047AB]">
+              <span class="px-2 py-0.5 rounded bg-orange-100 border border-[#EA580C] font-mono text-[11px] font-bold text-[#EA580C]">
                 STATUS: AVAILABLE // MARCH 2027 (PFLICHTPRAKTIKUM / THESIS)
               </span>
             </div>
@@ -349,7 +349,7 @@
         </div>
       </div>
 
-      <!-- Featured Drawings Quick-Access Cards (DWG-001, DWG-002, DWG-009) -->
+      <!-- Featured Drawings Quick-Access Cards -->
       <div class="space-y-3">
         <div class="flex items-center justify-between px-1">
           <h2 class="font-mono text-xs font-bold uppercase tracking-wider text-slate-700">
@@ -361,54 +361,54 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <!-- Shortcut 1: DWG-001 Beetleweight -->
-          <div onclick="navigateTo('projects', event); openDwgModal('dwg-001', 0);" class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 cursor-pointer group">
-            <div class="flex items-center justify-between font-mono text-[11px] mb-2">
-              <span class="font-bold text-[#0047AB]">DWG-001 // MECHANICAL &amp; CAD</span>
-              <span class="text-slate-500">10/2026 – PRESENT</span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-[#0047AB] transition-colors">
-              1500g Beetleweight Combat Robot
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-              Belt-driven tank drivetrain, 4S 850mAh LiPo packaging, Absima SR4S control, and SolidWorks CAD &amp; FEA validation.
-            </p>
-            <div class="mt-3 font-mono text-[11px] font-semibold text-[#EA580C]">
-              [INSPECT CAD &amp; SPECS →]
-            </div>
-          </div>
-
-          <!-- Shortcut 2: DWG-002 Safran -->
+          <!-- Shortcut 1: Safran -->
           <div onclick="navigateTo('projects', event); openDwgModal('dwg-002', 0);" class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 cursor-pointer group">
             <div class="flex items-center justify-between font-mono text-[11px] mb-2">
-              <span class="font-bold text-[#0047AB]">DWG-002 // AUTOMATION &amp; PLC</span>
+              <span class="font-bold text-[#0047AB]">DWG-002 // AUTOMATION</span>
               <span class="text-slate-500">01/2026 – 06/2026</span>
             </div>
             <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-[#0047AB] transition-colors">
-              Automated CNC Laser Tube-Cutting Cell
+              CNC Laser Tube-Cutting Cell (Safran)
             </h3>
             <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-              Industrial laser cell for Safran with Siemens PLC, PROFINET safety interlocks, Nextion HMI, and GRBL/G-Code.
+              Industrial laser prototype with Siemens S7 PLC safety interlocks (TIA Portal), pneumatic guard, and Nextion HMI.
             </p>
             <div class="mt-3 font-mono text-[11px] font-semibold text-[#EA580C]">
               [INSPECT 4 PHOTOS &amp; SPECS →]
             </div>
           </div>
 
-          <!-- Shortcut 3: DWG-009 Racing Rams -->
-          <div onclick="navigateTo('projects', event); openDwgModal('dwg-009', 0);" class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 cursor-pointer group">
+          <!-- Shortcut 2: UR Chess Cell -->
+          <div onclick="navigateTo('projects', event); openDwgModal('dwg-004', 0);" class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 cursor-pointer group">
             <div class="flex items-center justify-between font-mono text-[11px] mb-2">
-              <span class="font-bold text-[#0047AB]">DWG-009 // MECHANICAL &amp; CAD</span>
-              <span class="text-slate-500">03/2024 – 01/2026</span>
+              <span class="font-bold text-[#0047AB]">DWG-004 // COBOT &amp; CNC</span>
+              <span class="text-slate-500">04/2026</span>
             </div>
             <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-[#0047AB] transition-colors">
-              Championship Gravity Race Car #13
+              CNC Chess Piece Sorting Cell (UR &amp; PLC)
             </h3>
             <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
-              1st Place Nationally (Tlaxcala 2024) — chassis &amp; steering optimization, lead driving, and sponsorship management.
+              Manual G-code CNC lathe pieces sorted via UR cobot Z-axis force probing, optical sensors, and Siemens PLC/HMI.
             </p>
             <div class="mt-3 font-mono text-[11px] font-semibold text-[#EA580C]">
-              [INSPECT 5 PHOTOS &amp; SPECS →]
+              [WATCH CELL VIDEO &amp; SPECS →]
+            </div>
+          </div>
+
+          <!-- Shortcut 3: RC Car -->
+          <div onclick="navigateTo('projects', event); openDwgModal('dwg-005', 0);" class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 cursor-pointer group">
+            <div class="flex items-center justify-between font-mono text-[11px] mb-2">
+              <span class="font-bold text-[#0047AB]">DWG-005 // CAD &amp; PCB</span>
+              <span class="text-slate-500">09/2025 – 01/2026</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-[#0047AB] transition-colors">
+              Outreach RC Car Platform Redesign
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+              SolidWorks belt-driven transmission, flexible TPU suspension geometry, and custom PCB Arduino shields.
+            </p>
+            <div class="mt-3 font-mono text-[11px] font-semibold text-[#EA580C]">
+              [INSPECT 3 PHOTOS &amp; SPECS →]
             </div>
           </div>
         </div>
@@ -435,13 +435,16 @@
         <!-- Category Filter Buttons -->
         <div class="flex flex-wrap items-center gap-2">
           <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-3.5 py-2 rounded-md bg-[#0047AB] text-white border border-slate-900 font-mono text-xs font-semibold cursor-pointer">
-            ALL (09)
+            ALL DRAWINGS (09)
+          </button>
+          <button onclick="filterProjects('automation')" data-filter="automation" class="filter-btn px-3.5 py-2 rounded-md bg-white text-slate-700 border border-slate-800 hover:border-[#0047AB] font-mono text-xs font-semibold cursor-pointer">
+            AUTOMATION &amp; CONTROL
           </button>
           <button onclick="filterProjects('mechanical')" data-filter="mechanical" class="filter-btn px-3.5 py-2 rounded-md bg-white text-slate-700 border border-slate-800 hover:border-[#0047AB] font-mono text-xs font-semibold cursor-pointer">
             MECHANICAL &amp; CAD
           </button>
-          <button onclick="filterProjects('automation')" data-filter="automation" class="filter-btn px-3.5 py-2 rounded-md bg-white text-slate-700 border border-slate-800 hover:border-[#0047AB] font-mono text-xs font-semibold cursor-pointer">
-            AUTOMATION &amp; PLC
+          <button onclick="filterProjects('motorsport')" data-filter="motorsport" class="filter-btn px-3.5 py-2 rounded-md bg-white text-slate-700 border border-slate-800 hover:border-[#0047AB] font-mono text-xs font-semibold cursor-pointer">
+            MOTORSPORT &amp; LEADERSHIP
           </button>
           <button onclick="filterProjects('lab')" data-filter="lab" class="filter-btn px-3.5 py-2 rounded-md bg-white text-slate-700 border border-slate-800 hover:border-[#EA580C] font-mono text-xs font-semibold cursor-pointer">
             MINI-PROJECTS &amp; LAB
@@ -486,7 +489,7 @@
                   09/2026 – PRESENT // GERMANY
                 </div>
                 <h4 class="font-display font-bold text-lg text-slate-900 mt-1.5">
-                  B.Eng. Automation Technology &amp; Production Informatics
+                  B.Eng. Automation Technology and Production Informatics
                 </h4>
                 <div class="font-medium text-sm text-slate-700 mt-0.5">
                   Hochschule Esslingen — University of Applied Sciences
@@ -506,7 +509,7 @@
                   08/2023 – PRESENT // MEXICO
                 </div>
                 <h4 class="font-display font-bold text-lg text-slate-900 mt-1.5">
-                  B.Sc. Mechatronics Engineering
+                  B.Sc. in Mechatronics Engineering
                 </h4>
                 <div class="font-medium text-sm text-slate-700 mt-0.5">
                   Tecnológico de Monterrey (ITESM)
@@ -533,25 +536,51 @@
             </div>
 
             <div class="space-y-6 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-300">
-              <!-- Project Intern -->
+              <!-- On-Campus Mechatronics Intern -->
               <div class="relative pl-7">
                 <span class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-[#0047AB] border-4 border-blue-100"></span>
                 <div class="flex flex-wrap items-center gap-2">
                   <span class="px-2 py-0.5 rounded bg-blue-50 border border-[#0047AB] font-mono text-[11px] font-semibold text-[#0047AB]">
-                    08/2025 – 01/2026
+                    09/2025 – 01/2026
                   </span>
                   <span class="font-mono text-[11px] text-slate-500">R&amp;D INTERNSHIP</span>
                 </div>
                 <h4 class="font-display font-bold text-lg text-slate-900 mt-1">
-                  Project Intern
+                  On-Campus Mechatronics Intern
                 </h4>
                 <div class="font-medium text-sm text-slate-700">
                   Tecnológico de Monterrey · Chihuahua, Mexico
                 </div>
                 <ul class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600 list-disc pl-4">
                   <li>Redesigned and simplified electrical architectures for an outreach RC car platform by creating custom PCBs, Arduino shields, H-bridge motor drivers, and servo harnesses.</li>
-                  <li>Modeled and 3D-printed functional drivetrain, belt-pulley, Ackermann steering, and flexible TPU suspension assemblies in SolidWorks.</li>
+                  <li>Modeled and 3D-printed functional drivetrain, belt-pulley, steering, and flexible TPU suspension assemblies in SolidWorks.</li>
                 </ul>
+              </div>
+
+              <!-- Super Copa MX Volunteer -->
+              <div class="relative pl-7">
+                <span class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-[#EA580C] border-4 border-orange-100"></span>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="px-2 py-0.5 rounded bg-orange-50 border border-[#EA580C] font-mono text-[11px] font-semibold text-[#EA580C]">
+                    09/2025
+                  </span>
+                  <span class="font-mono text-[11px] text-slate-500" data-i18n="sc_tag">TECHNICAL SCRUTINEERING</span>
+                </div>
+                <h4 class="font-display font-bold text-lg text-slate-900 mt-1" data-i18n="sc_role">
+                  Technical Scrutineering &amp; Parc Fermé Volunteer
+                </h4>
+                <div class="font-medium text-sm text-slate-700">
+                  Super Copa MX (GT Racing Series) · Chihuahua, Mexico
+                </div>
+                <ul class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600 list-disc pl-4">
+                  <li data-i18n="sc_b1">Conducted pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment to verify strict compliance with series homologation rules.</li>
+                  <li data-i18n="sc_b2">Executed Parc Fermé compliance inspections including official vehicle weighing, fuel sampling/analysis, and trackside marshal coordination.</li>
+                </ul>
+                <div class="mt-3">
+                  <button onclick="openDwgModal('exp-supercopa', 0)" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#EA580C] hover:bg-orange-700 text-white border border-slate-900 font-mono text-xs font-semibold shadow-sm transition-colors cursor-pointer">
+                    <span data-i18n="sc_btn">[INSPECT PHOTOS // GALLERY (3)]</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Vice President Sucesso Motor -->
@@ -559,7 +588,7 @@
                 <span class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-slate-800 border-4 border-slate-200"></span>
                 <div class="flex flex-wrap items-center gap-2">
                   <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-400 font-mono text-[11px] font-semibold text-slate-700">
-                    02/2025 – 2026
+                    02/2025 – 06/2026
                   </span>
                   <span class="font-mono text-[11px] text-slate-500">STUDENT LEADERSHIP</span>
                 </div>
@@ -590,35 +619,9 @@
                   Escudería Racing Rams (Gravity Race Car Team)
                 </div>
                 <ul class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600 list-disc pl-4">
-                  <li>Piloted the team's motorless gravity race car #13 to <strong>1st Place Nationally</strong> (5th consecutive title) in Tlaxcala 2024 and <strong>2nd Place Nationally</strong> in Arteaga 2025.</li>
+                  <li>Piloted the team's motorless gravity race car to <strong>1st Place Nationally</strong> (5th consecutive title) in Tlaxcala 2024 and <strong>2nd Place Nationally</strong> in Arteaga 2025.</li>
                   <li>Managed full team budgeting and led corporate sponsorship acquisition to fund vehicle fabrication, testing, and competition logistics.</li>
                 </ul>
-              </div>
-
-              <!-- Super Copa MX Volunteer -->
-              <div class="relative pl-7">
-                <span class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-[#EA580C] border-4 border-orange-100"></span>
-                <div class="flex flex-wrap items-center gap-2">
-                  <span class="px-2 py-0.5 rounded bg-orange-50 border border-[#EA580C] font-mono text-[11px] font-semibold text-[#EA580C]">
-                    2024 – 2026
-                  </span>
-                  <span class="font-mono text-[11px] text-slate-500" data-i18n="sc_tag">TECHNICAL SCRUTINEERING</span>
-                </div>
-                <h4 class="font-display font-bold text-lg text-slate-900 mt-1" data-i18n="sc_role">
-                  Technical Scrutineering &amp; Parc Fermé Volunteer
-                </h4>
-                <div class="font-medium text-sm text-slate-700">
-                  Super Copa MX GT Racing Series · Chihuahua, Mexico
-                </div>
-                <ul class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600 list-disc pl-4">
-                  <li data-i18n="sc_b1">Conducted pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment to verify strict compliance with series homologation rules.</li>
-                  <li data-i18n="sc_b2">Executed Parc Fermé compliance inspections including official vehicle weighing, fuel sampling/analysis, and trackside marshal coordination.</li>
-                </ul>
-                <div class="mt-3">
-                  <button onclick="openDwgModal('exp-supercopa', 0)" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#EA580C] hover:bg-orange-700 text-white border border-slate-900 font-mono text-xs font-semibold shadow-sm transition-colors cursor-pointer">
-                    <span data-i18n="sc_btn">[INSPECT PHOTOS // GALLERY (3)]</span>
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -637,11 +640,11 @@
         </h2>
       </div>
 
-      <!-- Verified SolidWorks & Robotics Certifications Grid -->
+      <!-- Verified Certifications Grid -->
       <div class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 sm:p-6">
         <div class="flex items-center justify-between border-b border-slate-300 pb-3 mb-5">
           <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-[#0047AB]">
-            01 // VERIFIED ENGINEERING CERTIFICATIONS (4x SOLIDWORKS + UR)
+            01 // VERIFIED ENGINEERING CERTIFICATIONS (05)
           </h3>
           <span class="font-mono text-[11px] text-slate-500">DASSAULT SYSTÈMES &amp; UNIVERSAL ROBOTS</span>
         </div>
@@ -656,7 +659,7 @@
               SolidWorks CAD Design Professional (CSWP)
             </h4>
             <p class="text-xs text-slate-600 mt-1">
-              Advanced parametric part modeling, multi-body assemblies, weldments, design tables, and complex engineering modifications.
+              Advanced parametric part modeling, multi-body assemblies, design tables, and complex engineering modifications.
             </p>
           </div>
 
@@ -714,7 +717,7 @@
         </div>
       </div>
 
-      <!-- Technical Software & Hardware Matrix + Languages & Licenses -->
+      <!-- Technical Software & Hardware Matrix + Languages -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div class="lg:col-span-7 din-sheet crosshair-tl crosshair-br rounded-xl p-5 sm:p-6 space-y-5">
           <div class="border-b border-slate-300 pb-3">
@@ -729,7 +732,7 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">SolidWorks (CSWP, Sheet Metal, Simulation, Weldments)</span>
+                <span class="font-bold text-slate-900">SolidWorks (CSWP / Sheet Metal / Simulation FEA)</span>
                 <span class="text-[#0047AB] font-bold">95% // CERTIFIED</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
@@ -739,7 +742,7 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">SolidWorks CAM &amp; G-Code, Fanuc CNC</span>
+                <span class="font-bold text-slate-900">SolidWorks CAM &amp; G-Code (Fanuc CNC Lathe/Mill)</span>
                 <span class="text-[#0047AB] font-bold">85% // HANDS-ON</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
@@ -749,11 +752,11 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">AutoCAD &amp; ANSYS Fluent</span>
-                <span class="text-[#EA580C] font-bold">75% // PROFICIENT</span>
+                <span class="font-bold text-slate-900">ANSYS Fluent &amp; AutoCAD</span>
+                <span class="text-[#EA580C] font-bold">70% // WORKING KNOWLEDGE</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
-                <div class="h-full bg-[#EA580C]" style="width: 75%"></div>
+                <div class="h-full bg-[#EA580C]" style="width: 70%"></div>
               </div>
             </div>
           </div>
@@ -764,7 +767,7 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">Siemens TIA Portal (PLCs, HMI, PROFINET)</span>
+                <span class="font-bold text-slate-900">Siemens TIA Portal (PLC / HMI / PROFINET Safety)</span>
                 <span class="text-[#0047AB] font-bold">88% // ADVANCED</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
@@ -774,7 +777,7 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">UR Collaborative Robots (PolyScope / Force Control)</span>
+                <span class="font-bold text-slate-900">Universal Robots (PolyScope / Force Control)</span>
                 <span class="text-[#0047AB] font-bold">85% // CERTIFIED</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
@@ -784,42 +787,42 @@
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">OPC UA, MQTT, Node-RED, LoRaWAN &amp; GRBL</span>
-                <span class="text-[#EA580C] font-bold">80% // DEPLOYED</span>
+                <span class="font-bold text-slate-900">Node-RED SCADA, MQTT, FluidSIM &amp; RoboDK</span>
+                <span class="text-[#EA580C] font-bold">75% // PROFICIENT</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
-                <div class="h-full bg-[#EA580C]" style="width: 80%"></div>
+                <div class="h-full bg-[#EA580C]" style="width: 75%"></div>
               </div>
             </div>
           </div>
 
-          <!-- Group C: Embedded Systems & Programming -->
+          <!-- Group C: Programming & Embedded Systems -->
           <div class="space-y-3 font-mono text-xs pt-2 border-t border-slate-200">
-            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">C // EMBEDDED SYSTEMS &amp; PROGRAMMING</div>
+            <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">C // PROGRAMMING &amp; EMBEDDED SYSTEMS</div>
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">C, C++, Arduino, ESP32, Raspberry Pi &amp; PIC Microcontrollers</span>
-                <span class="text-[#0047AB] font-bold">86% // ADVANCED</span>
+                <span class="font-bold text-slate-900">C / C++ (PIC18F / Embedded) &amp; Arduino / ESP32 / RPi</span>
+                <span class="text-[#0047AB] font-bold">85% // ADVANCED</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
-                <div class="h-full bg-[#0047AB]" style="width: 86%"></div>
+                <div class="h-full bg-[#0047AB]" style="width: 85%"></div>
               </div>
             </div>
 
             <div>
               <div class="flex justify-between mb-1">
-                <span class="font-bold text-slate-900">Python (OpenCV, NumPy, Matplotlib), MATLAB &amp; Simulink, LaTeX</span>
-                <span class="text-[#0047AB] font-bold">84% // PROFICIENT</span>
+                <span class="font-bold text-slate-900">Python (OpenCV / NumPy) &amp; MATLAB / Simulink</span>
+                <span class="text-[#0047AB] font-bold">82% // PROFICIENT</span>
               </div>
               <div class="w-full h-2.5 bg-slate-100 rounded-sm overflow-hidden border border-slate-300">
-                <div class="h-full bg-[#0047AB]" style="width: 84%"></div>
+                <div class="h-full bg-[#0047AB]" style="width: 82%"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Languages, Licenses & Interests -->
+        <!-- Languages & Interests -->
         <div class="lg:col-span-5 space-y-6">
           <div class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 sm:p-6">
             <div class="border-b border-slate-300 pb-3 mb-4">
@@ -838,15 +841,11 @@
               </div>
               <div class="p-3 rounded-lg bg-blue-50/70 border border-[#0047AB]">
                 <div class="font-bold text-slate-900">GERMAN</div>
-                <div class="text-[#EA580C] font-semibold mt-0.5">Goethe A2 (Studying B1)</div>
+                <div class="text-[#EA580C] font-semibold mt-0.5">B1.2 (Goethe A2)</div>
               </div>
               <div class="p-3 rounded-lg bg-slate-50 border border-slate-800">
                 <div class="font-bold text-slate-900">ITALIAN</div>
                 <div class="text-slate-700 font-semibold mt-0.5">B1 (CELI Certified)</div>
-              </div>
-              <div class="p-3 rounded-lg bg-slate-50 border border-slate-800 sm:col-span-2">
-                <div class="font-bold text-slate-900">FRENCH</div>
-                <div class="text-slate-700 font-semibold mt-0.5">A2 (Elementary Proficiency)</div>
               </div>
             </div>
           </div>
@@ -854,13 +853,10 @@
           <div class="din-sheet crosshair-tl crosshair-br rounded-xl p-5 sm:p-6">
             <div class="border-b border-slate-300 pb-3 mb-4">
               <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-slate-700">
-                04 // LICENSES &amp; INTERESTS
+                04 // PERSONAL INTERESTS
               </h3>
             </div>
             <div class="flex flex-wrap gap-2 font-mono text-xs">
-              <span class="px-3 py-1.5 rounded-md bg-blue-50 border border-[#0047AB] text-[#0047AB] font-semibold">
-                🪪 Driver's License (Tipo A / Klasse B)
-              </span>
               <span class="px-3 py-1.5 rounded-md bg-slate-100 border border-slate-800 text-slate-800 font-semibold">
                 🥋 Taekwondo (Black Belt)
               </span>
@@ -1024,7 +1020,7 @@
               </div>
               <p id="modalPlaceholderPath" class="font-mono text-xs sm:text-sm text-white font-semibold"></p>
               <p class="text-xs text-slate-400 mt-1 max-w-md">
-                Save your image or MP4 video in <code class="text-[#EA580C]">assets/</code> with this exact filename to display it here.
+                Save your image or MP4 video in <code class="text-[#EA580C]">assets/</code> with this exact filename.
               </p>
             </div>
 
@@ -1053,7 +1049,7 @@
         <!-- Thumbnail Strip -->
         <div id="modalThumbnails" class="flex items-center gap-2 overflow-x-auto pb-1"></div>
 
-        <!-- Optional Root Cause Analysis Callout Box (DWG-007 EPS Prototype) -->
+        <!-- Optional Root Cause Analysis Callout Box (e.g. DWG-007 EPS Prototype) -->
         <div id="modalRcaBlock" class="hidden rounded-lg border-2 border-[#EA580C] bg-orange-50/70 p-4 space-y-1.5">
           <div id="modalRcaTitle" class="font-mono text-xs font-bold uppercase tracking-wider text-[#EA580C]">
             ROOT CAUSE ANALYSIS &amp; ENGINEERING LESSONS LEARNED
@@ -1101,13 +1097,13 @@
         date: '10/2026 – PRESENT',
         org: 'Hochschule Esslingen (Germany)',
         title: '1500g Beetleweight Combat Robot',
-        summary: 'Belt-driven tank drivetrain, 4S 850mAh LiPo power packaging, Absima SR4S RC control, and full SolidWorks CAD & FEA structural validation.',
-        description: 'Designing and building a competitive 1500g Beetleweight combat robot at Hochschule Esslingen. Responsible for full 3D SolidWorks chassis modeling, belt-driven 2-motor tank drivetrain, active weapon kinetics, 4S 850mAh LiPo battery packaging, Absima SR4S receiver integration, and SolidWorks Simulation FEA impact validation.',
-        tags: ['SolidWorks CAD & FEA', 'Belt Drivetrain', '4S 850mAh LiPo', 'Absima SR4S', '3D Printing'],
+        summary: 'Full mechanical conceptualization, 3D CAD chassis modeling, belt-driven 2-motor tank drivetrain, weapon kinetics, and physical fabrication of a 1.5 kg RC combat robot.',
+        description: 'Designing and building a competitive 1500g Beetleweight combat robot at Hochschule Esslingen. Responsible for 3D SolidWorks chassis assembly modeling, belt-driven 2-motor tank drivetrain, active weapon kinetics, 4S 850mAh LiPo power packaging, Absima SR4S receiver integration, and pre-competition arena testing.',
+        tags: ['SolidWorks', '3D Printing', 'Belt Drivetrain', '4S LiPo / RC', 'Mechatronics'],
         media: [
           {
             type: 'image',
-            src: 'assets/beetleweight-cad.jpg',
+            src: 'assets/battlebot-cad.jpg',
             caption: '3D CAD assembly and mechanical layout of the 1500g Beetleweight combat robot chassis.'
           }
         ]
@@ -1116,14 +1112,14 @@
         id: 'dwg-002',
         code: 'DWG-002',
         category: 'automation',
-        categoryLabel: 'AUTOMATION & PLC',
+        categoryLabel: 'AUTOMATION & CONTROL',
         status: 'COMPLETED',
         date: '01/2026 – 06/2026',
-        org: 'Safran & Tec de Monterrey',
-        title: 'Automated CNC Laser Tube-Cutting Cell',
-        summary: 'Industrial automation cell for Safran with Siemens PLC, PROFINET safety interlocks, Nextion touchscreen HMI, Arduino, and GRBL/G-Code motion.',
-        description: 'Developed an industrial-grade automated CNC laser tube-cutting cell in collaboration with Safran to improve precision and operator safety in aircraft tubing fabrication. Integrated a Siemens S7 PLC over PROFINET for hardwired safety interlocks, two-hand start controls, pneumatic safety guard actuation, Nextion touchscreen HMI, and Arduino/GRBL G-Code axis motion.',
-        tags: ['Siemens PLC', 'PROFINET', 'Nextion HMI', 'Arduino', 'GRBL / G-Code'],
+        org: 'Tecnológico de Monterrey & Safran',
+        title: 'CNC Laser Tube-Cutting Automation Cell (Safran)',
+        summary: 'Industrial automation prototype for aircraft tube laser cutting with Siemens PLC (TIA Portal), machine safety interlocks, pneumatic door, and Nextion HMI.',
+        description: 'Developed an industrial-grade CNC laser tube-cutting prototype in collaboration with Safran to improve precision and operator safety in aircraft tubing fabrication. Integrated a Siemens S7 PLC (TIA Portal) for hardwired safety interlocks, two-hand start buttons, pneumatic safety guard door actuation, and a custom Nextion touchscreen HMI.',
+        tags: ['Siemens TIA Portal', 'PLC Safety', 'CNC Laser', 'Nextion HMI', 'Pneumatics'],
         media: [
           {
             type: 'image',
@@ -1143,7 +1139,7 @@
           {
             type: 'image',
             src: 'assets/safran-wiring-bench.jpg',
-            caption: 'Control electronics bench validation with Arduino/GRBL interface and Nextion HMI.'
+            caption: 'Control electronics bench validation with microcontroller interface and Nextion HMI.'
           }
         ]
       },
@@ -1156,8 +1152,8 @@
         date: '05/2026',
         org: 'Tecnológico de Monterrey',
         title: '2-DOF SCARA Robot Trajectory Control',
-        summary: 'MATLAB direct/inverse kinematics via 2x2 Jacobian matrices (L1=15.28cm, L2=15.5cm), differential displacements, and trapezoidal velocity profiling.',
-        description: 'Developed a MATLAB kinematic controller for a 2-DOF planar SCARA manipulator (L1 = 15.28 cm, L2 = 15.5 cm). Computed direct kinematics and 2x2 Jacobian matrices to map differential linear displacements (100 steps/segment) across target x-y coordinates, applying a trapezoidal velocity profile (25% acceleration, 50% cruise, 25% deceleration) before exporting J1 and J2 joint angle trajectories to execute on the physical lab robot.',
+        summary: 'MATLAB Jacobian inverse kinematics (L1=15.28 cm, L2=15.5 cm) and trapezoidal velocity profiling driving a physical 2-DOF SCARA robot through straight-line x-y paths.',
+        description: 'Developed a MATLAB kinematic controller for a 2-DOF planar SCARA manipulator (L1 = 15.28 cm, L2 = 15.5 cm). Computed direct kinematics and 2x2 Jacobian matrices to map differential linear displacements (100 steps/segment) across four x-y target points, applying a trapezoidal velocity profile (25% acceleration, 50% cruise, 25% deceleration) before exporting J1 and J2 joint vectors to execute on the physical lab robot.',
         tags: ['MATLAB', 'Jacobian Kinematics', 'Trapezoidal Profile', 'SCARA Robotics'],
         media: [
           {
@@ -1190,10 +1186,10 @@
         status: 'CELL VALIDATED',
         date: '04/2026',
         org: 'Tecnológico de Monterrey',
-        title: 'CNC-Machined Chess Piece Sorting Cell with UR Cobot & Siemens PLC',
-        summary: 'Lathe G-Code machined chess pieces (rook, bishop, queen, king) sorted via UR cobot Z-axis force probing, optical sensors, and Siemens PLC/HMI.',
+        title: 'CNC-Machined Chess Piece Sorting Cell (UR Cobot & Siemens PLC/HMI)',
+        summary: 'Manually programmed G-code CNC lathe chess pieces (rook, bishop, queen, king) sorted via UR cobot Z-axis force probing, optical sensors, and Siemens PLC/HMI.',
         description: 'Manually programmed G-code on a CNC lathe to machine custom chess pieces (rook, bishop, queen, king). Integrated an automated conveyor belt equipped with a pneumatic stopper, optical presence sensor, and optical color sensor (black/white), coordinated between a Universal Robots (UR) cobot and a Siemens PLC (TIA Portal / PROFINET). The UR cobot executes a continuous downward Z-axis force-controlled probing routine until contact is detected, capturing the exact contact height to classify each chess piece via conditional logic and place it into its designated rack slot. Built a Siemens HMI featuring Start/Stop controls, real-time active piece status, placed-piece tracking, and full-batch completion signaling.',
-        tags: ['Universal Robots (Force Control)', 'Siemens PLC & HMI', 'PROFINET', 'CNC Lathe G-Code', 'Optical Sensors'],
+        tags: ['Universal Robots (Force Control)', 'Siemens TIA Portal', 'HMI / PROFINET', 'CNC G-Code', 'Optical Sensors'],
         media: [
           {
             type: 'video',
@@ -1215,15 +1211,45 @@
       {
         id: 'dwg-005',
         code: 'DWG-005',
+        category: 'mechanical',
+        categoryLabel: 'MECHANICAL & CAD',
+        status: 'COMPLETED',
+        date: '09/2025 – 01/2026',
+        org: 'Tecnológico de Monterrey',
+        title: 'Outreach RC Car Redesign (Custom PCBs & TPU Suspension)',
+        summary: 'Redesigned educational RC car with custom PCBs, Arduino shields, H-bridges, 3D-printed belt drivetrain, and flexible TPU suspension in SolidWorks.',
+        description: 'Redesigned an educational remote-controlled vehicle platform used to introduce high school students to Mechatronics Engineering. Replaced breadboard jumpers with custom-designed PCB Arduino shields and H-bridge modules, while modeling and 3D-printing a belt-driven rear axle, servo steering linkage, and flexible TPU suspension geometry in SolidWorks.',
+        tags: ['SolidWorks', 'Custom PCB', 'TPU 3D Printing', 'Arduino', 'Kinematics'],
+        media: [
+          {
+            type: 'image',
+            src: 'assets/rc-car-steering-front.jpg',
+            caption: 'Front steering assembly combining 3D-printed linkage, servo actuator, and LEGO Technic geometry.'
+          },
+          {
+            type: 'image',
+            src: 'assets/rc-car-pcb-suspension.jpg',
+            caption: 'Top chassis layout showing custom PCB shield, L298N H-bridge, and flexible 3D-printed TPU front suspension.'
+          },
+          {
+            type: 'image',
+            src: 'assets/rc-car-belt-drivetrain.jpg',
+            caption: 'Rear belt-driven powertrain with 3D-printed timing pulleys and geared DC motor.'
+          }
+        ]
+      },
+      {
+        id: 'dwg-006',
+        code: 'DWG-006',
         category: 'automation',
-        categoryLabel: 'AUTOMATION & PLC',
+        categoryLabel: 'AUTOMATION & CONTROL',
         status: 'DEPLOYED',
         date: '08/2025 – 12/2025',
-        org: 'Innovak Global & Tec de Monterrey',
-        title: 'Industrial Greenhouse IIoT Automation System',
-        summary: 'Two-phase school & Innovak Global industrial greenhouse automation using ESP32, Sensirion SCD30 CO2 sensor, Raspberry Pi MQTT broker, and Node-RED HMI.',
-        description: 'Co-developed and deployed a two-phase IIoT monitoring and closed-loop control system progressing from a campus testbed to a full-scale industrial greenhouse for Innovak Global. Engineered custom 3D-printed sensor enclosures (Sensirion SCD30 CO2, solar radiation, NDVI), ESP32 telemetry firmware publishing over a Raspberry Pi Mosquitto MQTT broker, and a custom Node-RED dashboard and field HMI cabinet.',
-        tags: ['ESP32', 'Sensirion SCD30', 'Raspberry Pi MQTT', 'Node-RED', 'HMI Cabinet'],
+        org: 'Innovak Global',
+        title: 'Industrial Greenhouse Automation System (Innovak Global)',
+        summary: 'Co-developed control & monitoring system integrating CO2 (Sensirion SCD30), solar radiation, and NDVI sensors via ESP32/MQTT and a custom Node-RED dashboard.',
+        description: 'Co-developed and deployed an industrial monitoring and closed-loop control system inside a large-scale greenhouse facility for Innovak Global. Engineered custom 3D-printed sensor enclosures (Sensirion SCD30 CO2, solar radiation, NDVI), ESP32 telemetry firmware publishing over Mosquitto MQTT, and a custom Node-RED dashboard on Raspberry Pi to control irrigation, lighting, and ventilation.',
+        tags: ['ESP32', 'MQTT', 'Node-RED', 'Raspberry Pi', 'Sensirion SCD30'],
         media: [
           {
             type: 'image',
@@ -1258,36 +1284,6 @@
         ]
       },
       {
-        id: 'dwg-006',
-        code: 'DWG-006',
-        category: 'mechanical',
-        categoryLabel: 'MECHANICAL & CAD',
-        status: 'COMPLETED',
-        date: '08/2025 – 01/2026',
-        org: 'Tecnológico de Monterrey',
-        title: 'Outreach RC Car Platform Redesign',
-        summary: 'Project Intern redesigning an educational RC car with custom PCBs, 3D-printed TPU suspension, Ackermann steering linkage, and belt drivetrain.',
-        description: 'Redesigned an educational remote-controlled vehicle platform used to introduce high school students to Mechatronics Engineering. Replaced breadboard jumpers with custom-designed PCB Arduino shields and H-bridge modules, while modeling and 3D-printing a belt-driven rear axle, Ackermann steering linkage, and flexible TPU suspension geometry in SolidWorks.',
-        tags: ['SolidWorks', 'Custom PCBs', 'TPU 3D Printing', 'Ackermann Steering', 'Belt Drivetrain'],
-        media: [
-          {
-            type: 'image',
-            src: 'assets/rc-car-steering-front.jpg',
-            caption: 'Front Ackermann steering assembly combining 3D-printed linkage, servo actuator, and LEGO Technic geometry.'
-          },
-          {
-            type: 'image',
-            src: 'assets/rc-car-pcb-suspension.jpg',
-            caption: 'Top chassis layout showing custom PCB shield, L298N H-bridge, and flexible 3D-printed TPU front suspension.'
-          },
-          {
-            type: 'image',
-            src: 'assets/rc-car-belt-drivetrain.jpg',
-            caption: 'Rear belt-driven powertrain with 3D-printed timing pulleys and geared DC motor.'
-          }
-        ]
-      },
-      {
         id: 'dwg-007',
         code: 'DWG-007',
         category: 'lab',
@@ -1295,14 +1291,14 @@
         status: 'R&D PROOF OF CONCEPT',
         date: '02/2025 – 06/2025',
         org: 'Tecnológico de Monterrey (4th Semester)',
-        title: 'Electromechanical Power Steering (EPS) R&D Prototype',
-        summary: 'SolidWorks 3D kinematic assembly, ISO 281 bearing life (626Z), PETG pulleys, and PIC18F4585 closed-loop C firmware (PWM/ADC) with AS5600 & DM542.',
+        title: 'Electromechanical Power Steering (EPS) Prototype — R&D Proof of Concept',
+        summary: '3D kinematic modeling in SolidWorks, analytical vector/stress & ISO 281 bearing life calculations, PETG pulley-cable drive, and PIC18F4585 closed-loop C control.',
         description: 'Designed and simulated an experimental Electromechanical Power Steering (EPS) retrofit system. Completed full 3D kinematic modeling in SolidWorks, analytical velocity/acceleration vector and stress calculations, ISO 281 bearing life sizing (626Z), 3D-printed PETG pulley-cable transmission, and closed-loop stepper control in C on a PIC18F4585 microcontroller (PWM/ADC) simulated in Proteus with an AS5600 magnetic encoder and DM542 driver.',
         rca: {
           title: 'ROOT CAUSE ANALYSIS & ENGINEERING LESSONS LEARNED',
           text: 'While theoretical yield-stress calculations confirmed the 3D-printed PETG pulley brackets remained well below yield strength (σ = 0.784 MPa vs. 27.5 MPa), physical load testing revealed excessive elastic bending deflection that caused cable slack—demonstrating the necessity of stiffness validation via SolidWorks Simulation (FEA) prior to fabrication. Furthermore, breadboard contact faults under 24 VDC load underscored the importance of dedicated custom PCBs, directly motivating the custom PCB architecture and FEA validation applied in subsequent projects.'
         },
-        tags: ['SolidWorks Kinematics', 'PIC18F4585 (C)', 'AS5600 & DM542', 'ISO 281 (626Z)', 'Proteus'],
+        tags: ['SolidWorks Kinematics', 'PIC18F4585 (C)', 'Proteus', 'ISO 281', 'Root Cause Analysis'],
         media: [
           {
             type: 'image',
@@ -1329,41 +1325,41 @@
       {
         id: 'dwg-008',
         code: 'DWG-008',
-        category: 'mechanical',
-        categoryLabel: 'MECHANICAL & CAD',
-        status: '1ST PLACE WINNER',
-        date: '05/2025',
-        org: 'SOLIDWORKS CADathon Chihuahua',
-        title: '1st Place SOLIDWORKS CADathon — MechRams Test Robot',
-        summary: 'Designed a complete test robot for the MechRams FIRST Robotics Canada team alongside teammate Elías González Arias, winning 1st Place.',
-        description: 'Competed in the SOLIDWORKS CADathon in Chihuahua alongside teammate Elías González Arias, rapidly modeling and assembling a functional test robot for the MechRams FIRST Robotics Canada team under strict competition time constraints. Delivered parametric sub-assemblies, drivetrain packaging, and manufacturing drawings, earning 1st Place overall.',
-        tags: ['SolidWorks', '1st Place CADathon', 'FIRST Robotics', 'Parametric Assemblies'],
+        category: 'motorsport',
+        categoryLabel: 'MOTORSPORT & LEADERSHIP',
+        status: 'VICE PRESIDENT',
+        date: '02/2025 – 06/2026',
+        org: 'Sucesso Motor Student Motorsport Group',
+        title: 'Vice President — Sucesso Motor Student Motorsport Group',
+        summary: 'Led 15+ multidisciplinary engineering students organizing car exhibitions, aerodynamics workshops, simulator tournaments, and fundraising.',
+        description: 'Served as Vice President of Sucesso Motor, coordinating engineering project roadmaps, aerodynamics workshops, racing simulator tournaments, campus vehicle exhibitions, and corporate sponsorship campaigns across a multidisciplinary team of over 15 engineering students.',
+        tags: ['Vice President', 'Team Leadership', 'Aerodynamics Workshops', 'Fundraising'],
         media: [
           {
             type: 'image',
-            src: 'assets/cadathon-robot.jpg',
-            caption: '1st Place SOLIDWORKS CADathon 3D assembly of the MechRams FIRST Robotics Canada test robot.'
+            src: 'assets/sucesso-motor.jpg',
+            caption: 'Sucesso Motor student motorsport team leadership, workshops, and vehicle exhibition operations.'
           }
         ]
       },
       {
         id: 'dwg-009',
         code: 'DWG-009',
-        category: 'mechanical',
-        categoryLabel: 'MECHANICAL & CAD',
+        category: 'motorsport',
+        categoryLabel: 'MOTORSPORT & LEADERSHIP',
         status: '1ST PLACE NATIONAL',
         date: '03/2024 – 01/2026',
         org: 'Escudería Racing Rams',
-        title: 'Championship Gravity Race Car #13',
-        summary: 'Lead Driver & Head of Finance — 1st Place Nationally in 2024 Tlaxcala Gravity Race Car competition, chassis/steering optimization, and sponsorship management.',
-        description: "Served as Lead Driver and Head of Finance for Escudería Racing Rams. Led chassis and steering geometry optimization, secured corporate sponsorships, managed full team budgeting, and piloted the #13 motorless gravity race car to 1st Place Nationally in the 2024 Tlaxcala Gravity Race Car competition (the team's 5th consecutive national win) and 2nd Place Nationally in Arteaga 2025.",
-        tags: ['Chassis & Steering', 'Lead Driver', 'Head of Finance', '1st Place National'],
+        title: 'Lead Driver & Head of Finance — Escudería Racing Rams',
+        summary: 'Secured sponsorships, managed team budget, and piloted gravity race car #13 to 1st Place Nationally (Tlaxcala 2024, 5th consecutive win) and 2nd Place Nationally (Arteaga 2025).',
+        description: "Served as Lead Driver and Head of Finance for Escudería Racing Rams. Secured corporate sponsorships, managed full team budgeting, and piloted the #13 motorless gravity race car to 1st Place Nationally in Tlaxcala 2024 (the team's 5th consecutive national win) and 2nd Place Nationally in Arteaga 2025.",
+        tags: ['Lead Driver', 'Head of Finance', '1st Place National', 'Vehicle Dynamics'],
         media: [
           {
             type: 'image',
             src: 'assets/racing-banner.jpg',
             mirrored: true,
-            caption: 'Escudería Racing Rams // Car #13 during national downhill competition.'
+            caption: 'Track action shot of #13 gravity race car during competition.'
           },
           {
             type: 'image',
@@ -1397,11 +1393,11 @@
         category: 'motorsport',
         categoryLabel: 'MOTORSPORT // SCRUTINEERING',
         status: 'VERIFIED FIELD RECORD',
-        date: '2024 – 2026',
-        org: 'Super Copa MX GT Racing Series · Chihuahua, Mexico',
+        date: '09/2025',
+        org: 'Super Copa MX (GT Racing Series) · Chihuahua, Mexico',
         title: 'Technical Scrutineering & Parc Fermé Volunteer — Super Copa MX',
         summary: 'Pre- and post-race GT vehicle technical inspection, Parc Fermé compliance, official weighing, and fuel sampling.',
-        description: 'Volunteered as a Technical Scrutineering and Parc Fermé inspector during the Super Copa MX GT Racing Series rounds in Chihuahua, Mexico. Executed pre- and post-race technical checks on GT race cars and driver safety gear (helmets, HANS devices, fire-retardant suits) against series homologation regulations, alongside official Parc Fermé vehicle weighing, fuel sampling/analysis, and pit-lane/trackside marshal coordination.',
+        description: 'Volunteered as a Technical Scrutineering and Parc Fermé inspector during the Super Copa MX GT Racing Series round in Chihuahua, Mexico. Executed pre- and post-race technical checks on GT race cars and driver safety gear (helmets, HANS devices, fire-retardant suits) against series homologation regulations, alongside official Parc Fermé vehicle weighing, fuel sampling/analysis, and pit-lane/trackside marshal coordination.',
         tags: ['Technical Scrutineering', 'Parc Fermé', 'GT Homologation', 'Vehicle Weighing', 'Motorsport Safety'],
         media: [
           {
@@ -1445,6 +1441,10 @@
       }
     }
 
+    function showView(viewId, event) {
+      navigateTo(viewId, event);
+    }
+
     // 3. RENDER & FILTER PROJECT DRAWING SHEETS
     function renderProjects() {
       const grid = document.getElementById('projectsGrid');
@@ -1470,7 +1470,7 @@
                 <span class="px-2 py-0.5 rounded border text-[10px] font-bold ${badgeColor}">${project.categoryLabel}</span>
               </div>
 
-              <!-- Preview Thumbnail Slot (Outer wrapper handles hover zoom; inner img handles permanent mirror) -->
+              <!-- Preview Thumbnail Slot (Outer wrapper handles zoom so mirrored images never flip on hover) -->
               <div onclick="openDwgModal('${project.id}', 0)" class="relative h-44 bg-slate-900 border-b border-slate-800 overflow-hidden cursor-pointer">
                 <div class="w-full h-full transition-transform duration-300 group-hover:scale-105">
                   ${
@@ -1545,7 +1545,7 @@
         .map(t => `<span class="px-2 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-semibold text-slate-700">${t}</span>`)
         .join('');
 
-      // Optional Root Cause Analysis Block (DWG-007 EPS Prototype)
+      // Optional Root Cause Analysis Block
       const rcaContainer = document.getElementById('modalRcaBlock');
       if (currentModalProject.rca) {
         rcaContainer.classList.remove('hidden');
@@ -1690,7 +1690,7 @@
         btn_view_dwg: 'ALLE 09 PROJEKTBLÄTTER ANSEHEN →',
         btn_contact: 'KONTAKT',
         obj_label: 'ZIELPOSITION // PRAKTIKUM & BACHELORARBEIT',
-        obj_text: 'Gesucht: Ein Praktikum oder eine Abschlussarbeit im Bereich CAD-Konstruktion, wo ich meine SolidWorks-Kenntnisse einbringen kann: CSWP-zertifiziert mit zusätzlichen Zertifizierungen in Blechbearbeitung (Sheet Metal) und Simulation. Ich bin ebenso offen für weitere Praktika und Abschlussarbeiten in Mechatronik und Automatisierung.',
+        obj_text: 'Gesucht: Ein Praktikum oder eine Bachelorarbeit im Bereich CAD-Konstruktion, wo ich meine SolidWorks-Kenntnisse einbringen kann: CSWP-zertifiziert sowie zusätzliche Zertifizierungen in Sheet Metal und Simulation. Ich bin ebenso offen für weitere Praktika und Abschlussarbeiten in Mechatronik und Automatisierungstechnik.',
         proj_title: 'Technische Projektblätter (DWG-001 — DWG-009)',
         exp_title: 'Studium, Ingenieurpraxis & Motorsport-Erfahrung',
         exp_sub: 'Deutsch-Mexikanischer Doppelabschluss kombiniert mit industrieller F&E, GT-Motorsport-Technikabnahme und Teamleitung.',
