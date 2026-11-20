@@ -244,28 +244,28 @@
           </div>
         </div>
 
-        <!-- Profile Header & Details (Positioned cleanly below banner without overlap) -->
-        <div class="px-5 sm:px-8 pt-6 pb-6 sm:pb-8">
-          <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-              <!-- Square LR / Profile Photo Badge -->
-              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-slate-900 border-2 border-slate-800 shadow-md flex flex-col items-center justify-center text-white shrink-0 relative overflow-hidden">
+        <!-- Profile Header & Details (Large overlapping profile photo badge + clean white area for text/buttons) -->
+        <div class="px-5 sm:px-8 pt-4 sm:pt-5 pb-6 sm:pb-8">
+          <div class="relative flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-end gap-5">
+              <!-- Large Overlapping Profile Photo Frame -->
+              <div class="-mt-24 sm:-mt-28 md:-mt-32 w-44 h-44 sm:w-52 sm:h-52 md:w-56 md:h-56 rounded-2xl bg-slate-900 border-2 border-slate-900 ring-4 ring-white shadow-xl flex flex-col items-center justify-center text-white shrink-0 relative z-20 overflow-hidden">
                 <img
                   src="assets/profile.jpg"
                   alt="Luis Ricardo Arellanes Saucedo"
                   onerror="this.style.display='none'"
                   class="w-full h-full object-cover object-top absolute inset-0 z-10"
                 />
-                <span class="font-display font-bold text-3xl tracking-tighter text-white">LR</span>
-                <span class="font-mono text-[9px] text-sky-400 tracking-widest mt-0.5">B.ENG.</span>
+                <span class="font-display font-bold text-5xl tracking-tighter text-white">LR</span>
+                <span class="font-mono text-xs text-sky-400 tracking-widest mt-1">B.ENG.</span>
               </div>
 
               <!-- Name & Degree -->
-              <div>
-                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-blue-50 border border-[#0047AB] font-mono text-[11px] font-semibold text-[#0047AB] mb-1.5">
+              <div class="pb-1">
+                <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-blue-50 border border-[#0047AB] font-mono text-[11px] font-semibold text-[#0047AB] mb-2">
                   <span>DHIK DOUBLE DEGREE // HOCHSCHULE ESSLINGEN &amp; TEC DE MONTERREY</span>
                 </div>
-                <h1 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-slate-900 tracking-tight">
+                <h1 class="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-slate-900 tracking-tight leading-tight">
                   Luis Ricardo Arellanes Saucedo
                 </h1>
                 <p class="text-sm sm:text-base font-medium text-slate-600 mt-1" data-i18n="hero_role">
@@ -275,7 +275,7 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-wrap items-center gap-2.5 pt-2 md:pt-0">
+            <div class="flex flex-wrap items-center gap-2.5 pb-1 shrink-0">
               <button onclick="navigateTo('projects', event)" class="px-4 py-2.5 rounded-lg bg-[#0047AB] hover:bg-blue-800 text-white border border-slate-900 font-mono text-xs font-semibold shadow-sm transition-colors cursor-pointer">
                 <span data-i18n="btn_view_dwg">EXPLORE ALL 10 DRAWINGS →</span>
               </button>
