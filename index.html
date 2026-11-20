@@ -576,6 +576,11 @@
                   <li data-i18n="sc_b1">Conducted pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment to verify strict compliance with series homologation rules.</li>
                   <li data-i18n="sc_b2">Executed Parc Fermé compliance inspections including official vehicle weighing, fuel sampling/analysis, and trackside marshal coordination.</li>
                 </ul>
+                <div class="mt-3">
+                  <button onclick="openDwgModal('exp-supercopa', 0)" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#EA580C] hover:bg-orange-700 text-white border border-slate-900 font-mono text-xs font-semibold shadow-sm transition-colors cursor-pointer">
+                    <span data-i18n="sc_btn">[INSPECT PHOTOS // GALLERY (3)]</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Vice President Sucesso Motor -->
@@ -1393,6 +1398,39 @@
             caption: 'High-speed mountain descent run securing 2nd Place National in Arteaga 2025.'
           }
         ]
+    };
+
+    // Extra modal records (e.g. Experience & Motorsport Field Entries)
+    const extraModalData = [
+      {
+        id: 'exp-supercopa',
+        code: 'EXP-001',
+        category: 'motorsport',
+        categoryLabel: 'MOTORSPORT // SCRUTINEERING',
+        status: 'VERIFIED FIELD RECORD',
+        date: '09/2025',
+        org: 'Super Copa MX (GT Racing Series) · Chihuahua, Mexico',
+        title: 'Technical Scrutineering & Parc Fermé Volunteer — Super Copa MX',
+        summary: 'Pre- and post-race GT vehicle technical inspection, Parc Fermé compliance, official weighing, and fuel sampling.',
+        description: 'Volunteered as a Technical Scrutineering and Parc Fermé inspector during the Super Copa MX GT Racing Series round in Chihuahua, Mexico. Executed pre- and post-race technical checks on GT race cars and driver safety gear (helmets, HANS devices, fire-retardant suits) against series homologation regulations, alongside official Parc Fermé vehicle weighing, fuel sampling/analysis, and pit-lane/trackside marshal coordination.',
+        tags: ['Technical Scrutineering', 'Parc Fermé', 'GT Homologation', 'Vehicle Weighing', 'Motorsport Safety'],
+        media: [
+          {
+            type: 'image',
+            src: 'assets/supercopa-scrutineering-1.jpg',
+            caption: 'Pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment.'
+          },
+          {
+            type: 'image',
+            src: 'assets/supercopa-parc-ferme-2.jpg',
+            caption: 'Parc Fermé compliance inspections, official vehicle weighing, and fuel sampling operations.'
+          },
+          {
+            type: 'image',
+            src: 'assets/supercopa-gt-3.jpg',
+            caption: 'Trackside marshal coordination and GT grid technical inspection at Super Copa MX.'
+          }
+        ]
       }
     ];
 
@@ -1400,376 +1438,19 @@
     let currentModalProject = null;
     let currentMediaIndex = 0;
     let currentLang = 'en';
-
-    // 2. SPA MULTI-VIEW NAVIGATION
-    function navigateTo(viewId, event) {
-      if (event) event.preventDefault();
-
-      document.querySelectorAll('.page-view').forEach(view => {
-        view.classList.remove('active');
-      });
-
-      const target = document.getElementById(`view-${viewId}`);
-      if (target) {
-        target.classList.add('active');
-      }
-
-      document.querySelectorAll('.nav-tab').forEach(btn => {
-        if (btn.dataset.nav === viewId) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      if (history.pushState) {
-        history.pushState(null, null, `#${viewId}`);
-      } else {
-        window.location.hash = viewId;
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.replace('#', '') || 'overview';
-      if (['overview', 'projects', 'experience', 'skills', 'contact'].includes(hash)) {
-        navigateTo(hash);
-      }
-    });
-
-    // 3. RENDER PROJECT CARDS
-    function renderProjects() {
-      const grid = document.getElementById('projectsGrid');
-      const filtered = currentFilter === 'all'
-        ? projectsData
-        : projectsData.filter(p => p.category === currentFilter);
-
-      grid.innerHTML = filtered.map(project => {
-        const firstMedia = project.media[0];
-        const isVideoFirst = firstMedia.type === 'video';
-        const mirrorClass = firstMedia.mirrored ? '-scale-x-100' : '';
-        const count = project.media.length;
-
-        const previewHtml = isVideoFirst
-          ? `
-            <div class="w-full h-full flex flex-col items-center justify-center text-center p-4 bg-gradient-to-br from-slate-900 via-[#0F4C81] to-slate-800 text-white">
-              <div class="w-11 h-11 rounded-full bg-[#EA580C] flex items-center justify-center shadow-lg mb-2 group-hover:scale-110 transition-transform">
-                <svg class="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-              <span class="font-mono text-[10px] text-sky-300 border border-sky-400/40 px-2 py-0.5 rounded mb-1">
-                ${project.code} // VIDEO + ${count - 1} VIEWS
-              </span>
-              <span class="font-display font-bold text-sm px-2">${project.title}</span>
-            </div>
-          `
-          : `
-            <img
-              src="${firstMedia.src}"
-              alt="${project.title}"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              class="w-full h-full object-cover ${mirrorClass} group-hover:scale-105 transition-transform duration-300"
-            />
-            <div class="hidden absolute inset-0 flex-col items-center justify-center text-center p-4 bg-gradient-to-br from-slate-900 via-[#0F4C81] to-slate-800 text-white">
-              <span class="font-mono text-[10px] text-sky-300 border border-sky-400/40 px-2 py-0.5 rounded mb-1.5">
-                ${project.code} // ${count} MEDIA SLOT${count > 1 ? 'S' : ''}
-              </span>
-              <span class="font-display font-bold text-sm px-2">${project.title}</span>
-            </div>
-          `;
-
-        return `
-          <article class="din-sheet crosshair-tl crosshair-br rounded-xl overflow-hidden flex flex-col justify-between">
-            <div>
-              <div class="bg-slate-50 border-b border-slate-800 px-4 py-2 flex items-center justify-between font-mono text-[11px]">
-                <span class="font-bold text-[#0047AB]">${project.code}</span>
-                <span class="text-slate-600">${project.date}</span>
-              </div>
-
-              <div onclick="openDwgModal('${project.id}', 0)" class="relative h-48 bg-slate-900 overflow-hidden border-b border-slate-800 cursor-pointer group">
-                ${previewHtml}
-
-                <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-slate-950/90 border border-slate-700 font-mono text-[10px] text-white">
-                  ${isVideoFirst ? '🎬 VIDEO + ' + count + ' MEDIA' : '📷 ' + count + (count === 1 ? ' VIEW' : ' VIEWS')}
-                </div>
-              </div>
-
-              <div class="p-4 sm:p-5">
-                <div class="flex items-center justify-between gap-2 mb-1.5">
-                  <span class="font-mono text-[10px] font-bold text-[#EA580C] uppercase">${project.categoryLabel}</span>
-                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-800 font-semibold">${project.status}</span>
-                </div>
-                <h3 class="font-display font-bold text-lg text-slate-900 leading-snug">
-                  ${project.title}
-                </h3>
-                <div class="font-mono text-xs text-slate-500 mt-0.5 mb-2.5">
-                  ${project.org}
-                </div>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  ${project.summary}
-                </p>
-              </div>
-            </div>
-
-            <div class="px-4 sm:px-5 pb-4 pt-2 border-t border-slate-200 space-y-3">
-              <div class="flex flex-wrap gap-1.5">
-                ${project.tags.map(tag => `<span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-300 font-mono text-[10px] text-slate-800">${tag}</span>`).join('')}
-              </div>
-              <button onclick="openDwgModal('${project.id}', 0)" class="w-full py-2 px-3 rounded-lg bg-[#0047AB] hover:bg-blue-800 text-white border border-slate-900 font-mono text-xs font-semibold transition-colors cursor-pointer">
-                [INSPECT DWG &amp; GALLERY (${count})]
-              </button>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    function filterProjects(category) {
-      currentFilter = category;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.dataset.filter === category) {
-          btn.classList.add('active', 'bg-[#0047AB]', 'text-white', 'border-slate-900');
-          btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-800');
-        } else {
-          btn.classList.remove('active', 'bg-[#0047AB]', 'text-white', 'border-slate-900');
-          btn.classList.add('bg-white', 'text-slate-700', 'border-slate-800');
-        }
-      });
-      renderProjects();
-    }
-
+// ... existing code ... -->
     // 4. MODAL GALLERY & TECHNICAL SPECIFICATION INSPECTOR (IMAGES + VIDEO)
     function openDwgModal(projectId, mediaIndex = 0) {
-      currentModalProject = projectsData.find(p => p.id === projectId);
+      currentModalProject = projectsData.find(p => p.id === projectId) || extraModalData.find(p => p.id === projectId);
       if (!currentModalProject) return;
 
       currentMediaIndex = mediaIndex;
-      document.getElementById('modalDwgCode').textContent = currentModalProject.code;
-      document.getElementById('modalTitle').textContent = currentModalProject.title;
-      document.getElementById('modalDescription').textContent = currentModalProject.description;
-      document.getElementById('modalOrg').textContent = currentModalProject.org;
-      document.getElementById('modalDate').textContent = currentModalProject.date;
-      document.getElementById('modalTags').innerHTML = currentModalProject.tags
-        .map(t => `<span class="px-2 py-0.5 rounded bg-white border border-slate-300 text-[10px] text-slate-800">${t}</span>`)
-        .join('');
-
-      // Optional Root Cause Analysis Block (DWG-007)
-      const rcaContainer = document.getElementById('modalRcaBlock');
-      if (currentModalProject.rca) {
-        rcaContainer.classList.remove('hidden');
-        document.getElementById('modalRcaTitle').textContent = currentModalProject.rca.title;
-        document.getElementById('modalRcaText').textContent = currentModalProject.rca.text;
-      } else {
-        rcaContainer.classList.add('hidden');
-      }
-
-      // Optional External Video Link (DWG-003)
-      const videoLinkContainer = document.getElementById('modalExternalLink');
-      if (currentModalProject.externalUrl) {
-        videoLinkContainer.classList.remove('hidden');
-        const linkAnchor = document.getElementById('modalExternalAnchor');
-        linkAnchor.href = currentModalProject.externalUrl;
-        document.getElementById('modalExternalLabel').textContent = currentModalProject.externalLabel || 'WATCH EXTERNAL HARDWARE DEMO VIDEO ↗';
-      } else {
-        videoLinkContainer.classList.add('hidden');
-      }
-
-      updateModalMedia();
-
-      const modal = document.getElementById('dwgModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function updateModalMedia() {
-      if (!currentModalProject) return;
-      const total = currentModalProject.media.length;
-      const item = currentModalProject.media[currentMediaIndex];
-
-      const imgEl = document.getElementById('modalMediaImg');
-      const videoEl = document.getElementById('modalMediaVideo');
-      const placeholderEl = document.getElementById('modalMediaPlaceholder');
-
-      // Pause any playing video before switching
-      videoEl.pause();
-      videoEl.removeAttribute('src');
-      videoEl.load();
-
-      imgEl.style.display = 'none';
-      videoEl.classList.add('hidden');
-      placeholderEl.classList.add('hidden');
-      placeholderEl.classList.remove('flex');
-
-      if (item.type === 'video') {
-        videoEl.classList.remove('hidden');
-        videoEl.onerror = function() {
-          videoEl.classList.add('hidden');
-          placeholderEl.classList.remove('hidden');
-          placeholderEl.classList.add('flex');
-        };
-        videoEl.src = item.src;
-      } else {
-        imgEl.style.display = 'block';
-        if (item.mirrored) {
-          imgEl.classList.add('-scale-x-100');
-        } else {
-          imgEl.classList.remove('-scale-x-100');
-        }
-        imgEl.onerror = function() {
-          this.style.display = 'none';
-          placeholderEl.classList.remove('hidden');
-          placeholderEl.classList.add('flex');
-        };
-        imgEl.src = item.src;
-      }
-
-      document.getElementById('modalMediaCounter').textContent = `${item.type === 'video' ? 'VID' : 'FIG'} ${currentMediaIndex + 1} / ${total}`;
-      document.getElementById('modalFilePathLabel').textContent = `FILE PATH: ${item.src}`;
-      document.getElementById('modalPlaceholderPath').textContent = item.src;
-      document.getElementById('modalMediaCaption').textContent = item.caption;
-
-      const prevBtn = document.getElementById('prevMediaBtn');
-      const nextBtn = document.getElementById('nextMediaBtn');
-      prevBtn.style.display = total > 1 ? 'block' : 'none';
-      nextBtn.style.display = total > 1 ? 'block' : 'none';
-
-      const thumbStrip = document.getElementById('modalThumbnails');
-      if (total > 1) {
-        thumbStrip.innerHTML = currentModalProject.media.map((m, idx) => `
-          <button onclick="selectMedia(${idx})" class="px-3 py-1.5 rounded font-mono text-xs border transition-colors cursor-pointer shrink-0 ${
-            idx === currentMediaIndex
-              ? 'bg-[#0047AB] text-white border-[#0047AB] font-bold'
-              : 'bg-slate-100 text-slate-700 border-slate-300 hover:border-[#0047AB]'
-          }">
-            ${m.type === 'video' ? '🎬 VID' : 'FIG'} ${idx + 1}
-          </button>
-        `).join('');
-      } else {
-        thumbStrip.innerHTML = '';
-      }
-    }
-
-    function changeMedia(delta) {
-      if (!currentModalProject) return;
-      const total = currentModalProject.media.length;
-      currentMediaIndex = (currentMediaIndex + delta + total) % total;
-      updateModalMedia();
-    }
-
-    function selectMedia(idx) {
-      currentMediaIndex = idx;
-      updateModalMedia();
-    }
-
-    function closeDwgModal() {
-      const videoEl = document.getElementById('modalMediaVideo');
-      if (videoEl) {
-        videoEl.pause();
-      }
-      const modal = document.getElementById('dwgModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-    }
-
-    function closeModalOnBackdrop(event) {
-      if (event.target.id === 'dwgModal') {
-        closeDwgModal();
-      }
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeDwgModal();
-    });
-
-    // 5. LOCAL PHOTO & VIDEO LIVE PREVIEW HELPERS
-    function previewBannerPhoto(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const dataUrl = e.target.result;
-        const heroImg = document.getElementById('heroBannerImg');
-        heroImg.src = dataUrl;
-        heroImg.style.display = 'block';
-        document.getElementById('bannerFallback').style.display = 'none';
-
-        const racingProj = projectsData.find(p => p.id === 'dwg-009');
-        if (racingProj && racingProj.media[0]) {
-          racingProj.media[0].src = dataUrl;
-          renderProjects();
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-    // 5. LOCAL SLOT MEDIA PREVIEW HELPER
-    function previewSlotMedia(event) {
-      const file = event.target.files[0];
-      if (!file || !currentModalProject) return;
-      const objectUrl = URL.createObjectURL(file);
-      const isVideo = file.type.startsWith('video/');
-      currentModalProject.media[currentMediaIndex].type = isVideo ? 'video' : 'image';
-      currentModalProject.media[currentMediaIndex].src = objectUrl;
-      updateModalMedia();
-      renderProjects();
-    }
-
-    // 6. COPY EMAIL & CONTACT MAILTO BUILDER
-    function copyEmail() {
-      const email = 'luisrarellanes@gmail.com';
-      const tempInput = document.createElement('input');
-      tempInput.value = email;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-
-      const label = document.getElementById('copyBtnLabel');
-      label.textContent = 'COPIED ✓';
-      setTimeout(() => {
-        label.textContent = 'COPY EMAIL';
-      }, 2200);
-    }
-
-    function handleContactSubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById('recruiterName').value.trim();
-      const company = document.getElementById('recruiterCompany').value.trim();
-      const type = document.getElementById('opportunityType').value;
-      const msg = document.getElementById('recruiterMessage').value.trim();
-
-      const subject = encodeURIComponent(`[Portfolio Inquiry] ${type} — ${company}`);
-      const body = encodeURIComponent(
-        `Hello Luis,\n\nMy name is ${name} from ${company}.\n\n${msg}\n\nBest regards,\n${name}`
-      );
-
-      document.getElementById('formStatusMsg').textContent = 'Launching email client...';
-      window.location.href = `mailto:luisrarellanes@gmail.com?subject=${subject}&body=${body}`;
-    }
-
-    // 7. BILINGUAL SWITCHER (EN / DE)
-    const translations = {
-      en: {
-        top_status: 'STATUS: AVAILABLE // MARCH 2027 (PFLICHTPRAKTIKUM / THESIS)',
-        brand_sub: 'MECHATRONICS & AUTOMATION // SOLIDWORKS CSWP',
-        nav_overview: 'OVERVIEW',
-        nav_projects: 'PROJECTS',
-        nav_experience: 'EXPERIENCE & EDU',
-        nav_skills: 'SKILLS & CERTS',
-        nav_contact: 'CONTACT',
-        hero_role: 'B.Eng. Mechatronics & Automation Engineering (DHIK Double Degree)',
-        btn_view_dwg: 'EXPLORE ALL 09 DRAWINGS →',
-        btn_contact: 'CONTACT',
-        obj_label: 'OBJECTIVE // INTERNSHIP & THESIS AVAILABILITY',
-        obj_text: 'Looking for: An internship or thesis in CAD design, where I can apply my SolidWorks background: CSWP certified, with additional Sheet Metal and Simulation certifications. I am also open to other internships and theses in mechatronics and automation.',
-        proj_title: 'Engineering Drawing Sheets (DWG-001 — DWG-009)',
-        exp_title: 'Education, Engineering & Motorsport Experience',
-        exp_sub: 'German-Mexican Double Degree track combined with hands-on industrial R&D, GT racing scrutineering, and student team leadership.',
+// ... existing code ... -->
         sc_tag: 'TECHNICAL SCRUTINEERING',
         sc_role: 'Technical Scrutineering & Parc Fermé Volunteer',
         sc_b1: 'Conducted pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment to verify strict compliance with series homologation rules.',
         sc_b2: 'Executed Parc Fermé compliance inspections including official vehicle weighing, fuel sampling/analysis, and trackside marshal coordination.',
+        sc_btn: '[INSPECT PHOTOS // GALLERY (3)]',
         skills_title: 'CAD Certifications, Software Stack & Languages',
         contact_title: 'Contact & Internship / Thesis Inquiries',
         contact_sub: 'Available for CAD Design, Mechatronics, or Automation Internships & Bachelor Theses in Germany starting March 2027.'
@@ -1794,31 +1475,10 @@
         sc_role: 'Ehrenamtlicher Mitarbeiter Technische Abnahme & Parc Fermé',
         sc_b1: 'Durchführung technischer Vor- und Nachkontrollen an GT-Rennfahrzeugen und Fahrersicherheitsausrüstung gemäß Serienreglement.',
         sc_b2: 'Durchführung von Parc-Fermé-Inspektionen einschließlich offizieller Fahrzeugverwiegung, Kraftstoffprobenahme und Streckenposten-Koordination.',
+        sc_btn: '[FOTOS ANSEHEN // GALERIE (3)]',
         skills_title: 'CAD-Zertifizierungen, Software-Stack & Sprachen',
         contact_title: 'Kontakt & Anfragen für Praktikum / Bachelorarbeit',
         contact_sub: 'Verfügbar für Praktika oder Bachelorarbeiten in CAD-Konstruktion, Mechatronik oder Automatisierungstechnik ab März 2027.'
       }
     };
-
-    function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'de' : 'en';
-      document.getElementById('langBadge').textContent = currentLang.toUpperCase();
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-          el.textContent = translations[currentLang][key];
-        }
-      });
-    }
-
-    // Initialize on DOM Load
-    window.addEventListener('DOMContentLoaded', () => {
-      renderProjects();
-      const initialHash = window.location.hash.replace('#', '');
-      if (['overview', 'projects', 'experience', 'skills', 'contact'].includes(initialHash)) {
-        navigateTo(initialHash);
-      }
-    });
-  </script>
-</body>
-</html>
+// ... existing code ... -->
