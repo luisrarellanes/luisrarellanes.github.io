@@ -1368,7 +1368,7 @@
         org: 'Escudería Racing Rams',
         title: 'Lead Driver & Head of Finance — Escudería Racing Rams',
         summary: 'Secured sponsorships, managed team budget, and piloted gravity race car #13 to 1st Place Nationally (Tlaxcala 2024, 5th consecutive win) and 2nd Place Nationally (Arteaga 2025).',
-        description: 'Served as Lead Driver and Head of Finance for Escudería Racing Rams. Secured corporate sponsorships, managed full team budgeting, and piloted the #13 motorless gravity race car to 1st Place Nationally in Tlaxcala 2024 (the team’s 5th consecutive national win) and 2nd Place Nationally in Arteaga 2025.',
+        description: "Served as Lead Driver and Head of Finance for Escudería Racing Rams. Secured corporate sponsorships, managed full team budgeting, and piloted the #13 motorless gravity race car to 1st Place Nationally in Tlaxcala 2024 (the team's 5th consecutive national win) and 2nd Place Nationally in Arteaga 2025.",
         tags: ['Lead Driver', 'Head of Finance', '1st Place National', 'Vehicle Dynamics'],
         media: [
           {
@@ -1398,9 +1398,10 @@
             caption: 'High-speed mountain descent run securing 2nd Place National in Arteaga 2025.'
           }
         ]
-    };
+      }
+    ];
 
-    // Extra modal records (e.g. Experience & Motorsport Field Entries)
+    // Extra modal records (Experience & Motorsport Field Entries)
     const extraModalData = [
       {
         id: 'exp-supercopa',
@@ -1438,14 +1439,274 @@
     let currentModalProject = null;
     let currentMediaIndex = 0;
     let currentLang = 'en';
-// ... existing code ... -->
+
+    // 2. SPA VIEW NAVIGATION
+    function navigateTo(viewId, event) {
+      if (event) event.preventDefault();
+      document.querySelectorAll('.page-view').forEach(sec => sec.classList.remove('active'));
+      const targetView = document.getElementById('view-' + viewId);
+      if (targetView) targetView.classList.add('active');
+
+      document.querySelectorAll('.nav-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-nav') === viewId);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + viewId);
+      }
+    }
+
+    function showView(viewId, event) {
+      navigateTo(viewId, event);
+    }
+
+    // 3. RENDER & FILTER PROJECT DRAWING SHEETS
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      if (!grid) return;
+
+      const filtered = currentFilter === 'all'
+        ? projectsData
+        : projectsData.filter(p => p.category === currentFilter);
+
+      grid.innerHTML = filtered.map(project => {
+        const firstMedia = project.media[0];
+        const isVideo = firstMedia && firstMedia.type === 'video';
+        const badgeColor = project.category === 'lab'
+          ? 'text-[#EA580C] bg-orange-50 border-[#EA580C]'
+          : 'text-[#0047AB] bg-blue-50 border-[#0047AB]';
+
+        return `
+          <article class="din-sheet crosshair-tl crosshair-br rounded-xl overflow-hidden flex flex-col justify-between group">
+            <div>
+              <!-- DIN Sheet Top Bar -->
+              <div class="bg-slate-50 border-b border-slate-800 px-4 py-2 flex items-center justify-between gap-2 font-mono text-[11px]">
+                <span class="font-bold text-slate-900">${project.code}</span>
+                <span class="px-2 py-0.5 rounded border text-[10px] font-bold ${badgeColor}">${project.categoryLabel}</span>
+              </div>
+
+              <!-- Preview Thumbnail Slot -->
+              <div onclick="openDwgModal('${project.id}', 0)" class="relative h-44 bg-slate-900 border-b border-slate-800 overflow-hidden cursor-pointer">
+                ${
+                  isVideo
+                    ? `<video src="${firstMedia.src}" muted playsinline preload="metadata" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></video>`
+                    : `<img src="${firstMedia.src}" alt="${project.title}" class="w-full h-full object-cover ${firstMedia.mirrored ? 'scale-x-[-1]' : ''} group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />`
+                }
+                <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 text-center bg-slate-900 text-slate-300">
+                  <span class="font-mono text-[10px] text-sky-400 border border-slate-700 px-2 py-0.5 rounded mb-1">${project.code} // ${project.media.length} MEDIA SLOT(S)</span>
+                  <span class="font-mono text-[11px] text-slate-400 break-all">${firstMedia.src}</span>
+                </div>
+                <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-slate-950/85 border border-slate-700 font-mono text-[10px] text-white">
+                  ${isVideo ? '▶ VIDEO + ' : ''}${project.media.length} ${project.media.length === 1 ? 'VIEW' : 'VIEWS'}
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="p-4 sm:p-5 space-y-2.5">
+                <div class="flex items-center justify-between gap-2 font-mono text-[11px] text-slate-500">
+                  <span>${project.date}</span>
+                  <span class="truncate max-w-[170px] text-right">${project.org}</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-[#0047AB] transition-colors leading-snug">
+                  ${project.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  ${project.summary}
+                </p>
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="px-4 sm:px-5 pb-4 pt-2 space-y-3">
+              <div class="flex flex-wrap gap-1.5">
+                ${project.tags.map(tag => `<span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-300 font-mono text-[10px] font-semibold text-slate-700">${tag}</span>`).join('')}
+              </div>
+              <button onclick="openDwgModal('${project.id}', 0)" class="w-full py-2.5 px-3 rounded-lg bg-slate-900 hover:bg-[#0047AB] text-white font-mono text-xs font-semibold transition-colors cursor-pointer">
+                [INSPECT DWG &amp; GALLERY]
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function filterProjects(category) {
+      currentFilter = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isActive = btn.getAttribute('data-filter') === category;
+        btn.classList.toggle('active', isActive);
+        btn.classList.toggle('bg-[#0047AB]', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-white', !isActive);
+        btn.classList.toggle('text-slate-700', !isActive);
+      });
+      renderProjects();
+    }
+
     // 4. MODAL GALLERY & TECHNICAL SPECIFICATION INSPECTOR (IMAGES + VIDEO)
     function openDwgModal(projectId, mediaIndex = 0) {
       currentModalProject = projectsData.find(p => p.id === projectId) || extraModalData.find(p => p.id === projectId);
       if (!currentModalProject) return;
 
       currentMediaIndex = mediaIndex;
-// ... existing code ... -->
+      document.getElementById('modalDwgCode').textContent = currentModalProject.code;
+      document.getElementById('modalTitle').textContent = currentModalProject.title;
+      document.getElementById('modalDescription').textContent = currentModalProject.description;
+      document.getElementById('modalOrg').textContent = currentModalProject.org;
+      document.getElementById('modalDate').textContent = currentModalProject.date;
+      document.getElementById('modalTags').innerHTML = currentModalProject.tags
+        .map(t => `<span class="px-2 py-0.5 rounded bg-white border border-slate-300 text-[10px] font-semibold text-slate-700">${t}</span>`)
+        .join('');
+
+      // Optional Root Cause Analysis Block
+      const rcaContainer = document.getElementById('modalRcaBlock');
+      if (currentModalProject.rca) {
+        rcaContainer.classList.remove('hidden');
+        document.getElementById('modalRcaTitle').textContent = currentModalProject.rca.title;
+        document.getElementById('modalRcaText').textContent = currentModalProject.rca.text;
+      } else {
+        rcaContainer.classList.add('hidden');
+      }
+
+      // Optional External Video Link
+      const videoLinkContainer = document.getElementById('modalExternalLink');
+      if (currentModalProject.externalUrl) {
+        videoLinkContainer.classList.remove('hidden');
+        const linkAnchor = document.getElementById('modalExternalAnchor');
+        linkAnchor.href = currentModalProject.externalUrl;
+        document.getElementById('modalExternalLabel').textContent = currentModalProject.externalLabel || 'OPEN EXTERNAL HARDWARE DEMO VIDEO ↗';
+      } else {
+        videoLinkContainer.classList.add('hidden');
+      }
+
+      updateModalMedia();
+      const modal = document.getElementById('dwgModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function updateModalMedia() {
+      if (!currentModalProject || !currentModalProject.media.length) return;
+      const total = currentModalProject.media.length;
+      if (currentMediaIndex < 0) currentMediaIndex = total - 1;
+      if (currentMediaIndex >= total) currentMediaIndex = 0;
+
+      const item = currentModalProject.media[currentMediaIndex];
+      const imgEl = document.getElementById('modalMediaImg');
+      const vidEl = document.getElementById('modalMediaVideo');
+      const phEl = document.getElementById('modalMediaPlaceholder');
+
+      // Pause any currently playing video when switching slides
+      vidEl.pause();
+      vidEl.removeAttribute('src');
+      vidEl.load();
+
+      phEl.classList.add('hidden');
+      phEl.classList.remove('flex');
+
+      if (item.type === 'video') {
+        imgEl.classList.add('hidden');
+        vidEl.classList.remove('hidden');
+        vidEl.src = item.src;
+        vidEl.onerror = function () {
+          vidEl.classList.add('hidden');
+          phEl.classList.remove('hidden');
+          phEl.classList.add('flex');
+        };
+      } else {
+        vidEl.classList.add('hidden');
+        imgEl.classList.remove('hidden');
+        imgEl.classList.toggle('scale-x-[-1]', Boolean(item.mirrored));
+        imgEl.src = item.src;
+        imgEl.onerror = function () {
+          imgEl.classList.add('hidden');
+          phEl.classList.remove('hidden');
+          phEl.classList.add('flex');
+        };
+      }
+
+      document.getElementById('modalPlaceholderPath').textContent = 'EXPECTED ASSET: ' + item.src;
+      document.getElementById('modalMediaCounter').textContent = `${item.type === 'video' ? 'VID' : 'FIG'} ${currentMediaIndex + 1} / ${total}`;
+      document.getElementById('modalFilePathLabel').textContent = 'FILE PATH: ' + item.src;
+      document.getElementById('modalMediaCaption').textContent = item.caption;
+
+      const showNav = total > 1;
+      document.getElementById('prevMediaBtn').style.display = showNav ? 'block' : 'none';
+      document.getElementById('nextMediaBtn').style.display = showNav ? 'block' : 'none';
+
+      // Render thumbnail selector buttons
+      const thumbs = document.getElementById('modalThumbnails');
+      thumbs.innerHTML = currentModalProject.media.map((m, idx) => `
+        <button onclick="setMediaIndex(${idx})" class="px-3 py-1.5 rounded border font-mono text-[11px] font-semibold shrink-0 cursor-pointer transition-colors ${idx === currentMediaIndex ? 'bg-[#0047AB] text-white border-slate-900' : 'bg-slate-100 text-slate-700 border-slate-300 hover:border-[#0047AB]'}">
+          ${m.type === 'video' ? '▶ VID' : 'FIG'} 0${idx + 1}
+        </button>
+      `).join('');
+    }
+
+    function setMediaIndex(idx) {
+      currentMediaIndex = idx;
+      updateModalMedia();
+    }
+
+    function changeMedia(delta) {
+      currentMediaIndex += delta;
+      updateModalMedia();
+    }
+
+    function previewSlotMedia(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !currentModalProject) return;
+      const objectUrl = URL.createObjectURL(file);
+      const isVid = file.type.startsWith('video/');
+      currentModalProject.media[currentMediaIndex] = {
+        ...currentModalProject.media[currentMediaIndex],
+        type: isVid ? 'video' : 'image',
+        src: objectUrl
+      };
+      updateModalMedia();
+    }
+
+    function closeDwgModal() {
+      const vidEl = document.getElementById('modalMediaVideo');
+      if (vidEl) vidEl.pause();
+      const modal = document.getElementById('dwgModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function closeModalOnBackdrop(event) {
+      if (event.target.id === 'dwgModal') {
+        closeDwgModal();
+      }
+    }
+
+    document.addEventListener('keydown', function (e) {
+      const modal = document.getElementById('dwgModal');
+      if (!modal || modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeDwgModal();
+      if (e.key === 'ArrowLeft') changeMedia(-1);
+      if (e.key === 'ArrowRight') changeMedia(1);
+    });
+
+    // 5. BILINGUAL SWITCHER (ENGLISH / DEUTSCH)
+    const translations = {
+      en: {
+        top_status: 'STATUS: AVAILABLE // MARCH 2027 (PFLICHTPRAKTIKUM / THESIS)',
+        brand_sub: 'MECHATRONICS & AUTOMATION // SOLIDWORKS CSWP',
+        nav_overview: 'OVERVIEW',
+        nav_projects: 'PROJECTS',
+        nav_experience: 'EXPERIENCE & EDU',
+        nav_skills: 'SKILLS & CERTS',
+        nav_contact: 'CONTACT',
+        hero_role: 'B.Eng. Mechatronics & Automation Engineering (DHIK Double Degree)',
+        btn_view_dwg: 'EXPLORE ALL 09 DRAWINGS →',
+        btn_contact: 'CONTACT',
+        obj_label: 'OBJECTIVE // INTERNSHIP & THESIS AVAILABILITY',
+        obj_text: 'Looking for: An internship or thesis in CAD design, where I can apply my SolidWorks background: CSWP certified, with additional Sheet Metal and Simulation certifications. I am also open to other internships and theses in mechatronics and automation.',
+        proj_title: 'Engineering Drawing Sheets (DWG-001 — DWG-009)',
+        exp_title: 'Education, Engineering & Motorsport Experience',
+        exp_sub: 'German-Mexican Double Degree track combined with hands-on industrial R&D, GT racing scrutineering, and student team leadership.',
         sc_tag: 'TECHNICAL SCRUTINEERING',
         sc_role: 'Technical Scrutineering & Parc Fermé Volunteer',
         sc_b1: 'Conducted pre- and post-race technical scrutineering of GT race vehicles and driver safety equipment to verify strict compliance with series homologation rules.',
@@ -1481,4 +1742,57 @@
         contact_sub: 'Verfügbar für Praktika oder Bachelorarbeiten in CAD-Konstruktion, Mechatronik oder Automatisierungstechnik ab März 2027.'
       }
     };
-// ... existing code ... -->
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'de' : 'en';
+      document.getElementById('langBadge').textContent = currentLang.toUpperCase();
+      const dict = translations[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+    }
+
+    // 6. CLIPBOARD COPY & MAILTO DISPATCH
+    function copyEmail() {
+      const email = 'luisrarellanes@gmail.com';
+      const tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        const label = document.getElementById('copyBtnLabel');
+        if (label) {
+          label.textContent = 'COPIED ✓';
+          setTimeout(() => { label.textContent = 'COPY EMAIL'; }, 2000);
+        }
+      } catch (err) {
+        console.error('Copy failed', err);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('recruiterName').value.trim();
+      const company = document.getElementById('recruiterCompany').value.trim();
+      const opp = document.getElementById('opportunityType').value;
+      const msg = document.getElementById('recruiterMessage').value.trim();
+
+      const subject = encodeURIComponent(`[Portfolio Inquiry] ${opp} — ${company}`);
+      const body = encodeURIComponent(`Hello Luis,\n\nName: ${name}\nCompany / Department: ${company}\nOpportunity: ${opp}\n\n${msg}\n\nBest regards,\n${name}`);
+
+      document.getElementById('formStatusMsg').textContent = 'DISPATCHING TO EMAIL CLIENT...';
+      window.location.href = `mailto:luisrarellanes@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    // 7. INITIALIZE ON LOAD
+    renderProjects();
+    const initialHash = window.location.hash.replace('#', '');
+    if (['overview', 'projects', 'experience', 'skills', 'contact'].includes(initialHash)) {
+      navigateTo(initialHash);
+    }
+  </script>
+</body>
+</html>
